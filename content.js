@@ -2,18 +2,15 @@
 function init() {
   const url = window.location.href;
   
-  // Match both old and new LeetCode profile URL patterns
-  const match = url.match(/leetcode\.com\/u\/([^\/]+)\/?/) || 
-                url.match(/leetcode\.com\/([^\/]+)\/?\??(tab=)?/);
+  // Match LeetCode profile URL patterns
+  const match = url.match(/leetcode\.com\/u\/([^\/]+)\/?/);
   
   if (match && match[1]) {
     const username = match[1];
-    // Ignore non-profile pages
-    if (['problems', 'problemset', 'explore', 'discuss', 'contest', 'interview'].includes(username)) {
-      return;
-    }
     console.log('LeetCode Friends: Detected profile for', username);
-    injectButton(username);
+    
+    // Wait a bit for page to fully load
+    setTimeout(() => injectButton(username), 1500);
   }
 }
 
@@ -24,41 +21,12 @@ function injectButton(username) {
     return;
   }
   
-  console.log('LeetCode Friends: Attempting to inject button');
+  console.log('LeetCode Friends: Attempting to inject button for', username);
   
-  // Find the username heading at the top of the profile
-  const targetSelectors = [
-    'div.text-title-large.font-semibold', // Main username display
-    'div[class*="text-title-large"]',
-    'div.flex.items-center.gap-2 div[class*="font-semibold"]',
-    'h1',
-  ];
-  
-  let target = null;
-  for (const selector of targetSelectors) {
-    const elements = document.querySelectorAll(selector);
-    for (const element of elements) {
-      // Check if this element contains the username and is near the top
-      const rect = element.getBoundingClientRect();
-      if (element.textContent.trim() === username && rect.top < 300) {
-        target = element;
-        console.log('LeetCode Friends: Found target element', selector, 'at position', rect.top);
-        break;
-      }
-    }
-    if (target) break;
-  }
-  
-  if (!target) {
-    console.log('LeetCode Friends: No target found, retrying...');
-    setTimeout(() => injectButton(username), 1000);
-    return;
-  }
-  
-  // Create button
+  // Create a floating button in the top-right corner instead
   const button = document.createElement('button');
   button.id = 'leetcode-friend-btn';
-  button.className = 'leetcode-friend-button';
+  button.className = 'leetcode-friend-button-fixed';
   button.textContent = '➕ Add Friend';
   
   button.addEventListener('click', (e) => {
@@ -67,26 +35,9 @@ function injectButton(username) {
     addFriend(username, button);
   });
   
-  // Find the parent container that holds the username
-  let container = target.parentElement;
-  
-  // Insert button right after the username in the same container
-  if (container && container.classList.contains('flex')) {
-    // If parent is a flex container, add button as sibling
-    container.appendChild(button);
-    console.log('LeetCode Friends: Button added to flex container');
-  } else {
-    // Otherwise create a wrapper
-    const wrapper = document.createElement('div');
-    wrapper.style.display = 'flex';
-    wrapper.style.alignItems = 'center';
-    wrapper.style.gap = '12px';
-    
-    target.parentNode.insertBefore(wrapper, target);
-    wrapper.appendChild(target);
-    wrapper.appendChild(button);
-    console.log('LeetCode Friends: Button wrapped with username');
-  }
+  // Add to body (floating button)
+  document.body.appendChild(button);
+  console.log('LeetCode Friends: Button injected as floating button');
   
   // Check if already added
   checkIfFriend(username, button);
@@ -95,6 +46,7 @@ function injectButton(username) {
 function checkIfFriend(username, button) {
   chrome.storage.sync.get(['friends'], (result) => {
     const friends = result.friends || [];
+    console.log('LeetCode Friends: Current friends list:', friends);
     if (friends.includes(username)) {
       button.textContent = '✓ Added';
       button.classList.add('added');
@@ -116,24 +68,26 @@ function addFriend(username, button) {
     
     friends.push(username);
     chrome.storage.sync.set({ friends }, () => {
+      console.log('LeetCode Friends: Saved friends list:', friends);
       button.textContent = '✓ Added';
       button.classList.add('added');
-      console.log('LeetCode Friends: Friend added successfully');
+      
+      // Show success message
       setTimeout(() => {
         button.textContent = '✓ Friend Added';
-      }, 500);
+      }, 300);
     });
   });
 }
 
-// Initialize when DOM is ready
+// Initialize
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
-  setTimeout(init, 500);
+  init();
 }
 
-// Watch for navigation changes (SPA)
+// Watch for URL changes
 let lastUrl = location.href;
 new MutationObserver(() => {
   const url = location.href;
