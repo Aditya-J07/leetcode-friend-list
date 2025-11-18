@@ -16,7 +16,7 @@ A lightweight Chrome extension that adds a **Friends system** to LeetCode. Easil
 
 ## 📸 Screenshots
 
-*Coming soon: Add screenshots of the extension in action*
+<img width="1917" height="966" alt="Screenshot 2025-11-18 224910" src="https://github.com/user-attachments/assets/b97fd0de-085d-4fb8-9931-97c739460885" />
 
 ## 🚀 Installation
 
