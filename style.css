@@ -5,8 +5,8 @@
   right: 20px !important;
   display: inline-block !important;
   padding: 10px 20px !important;
-  background: #FFA116 !important;
-  color: white !important;
+  background: #ffa2164b !important;
+  color: #FFA116 !important;
   border: none !important;
   border-radius: 8px !important;
   cursor: pointer !important;
@@ -18,17 +18,17 @@
 }
 
 .leetcode-friend-button-fixed:hover {
-  background: #FF8C00 !important;
+  background: #ff990067 !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
 }
 
 .leetcode-friend-button-fixed.added {
-  background: #00C853 !important;
+  background: #00c85341 !important;
 }
 
 .leetcode-friend-button-fixed.added:hover {
-  background: #00A844 !important;
+  background: #00a8434a !important;
 }
 
 /* Content Script Styles */
