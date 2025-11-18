@@ -26,25 +26,23 @@ function injectButton(username) {
   
   console.log('LeetCode Friends: Attempting to inject button');
   
-  // Try multiple selectors for different page layouts
+  // Find the username heading at the top of the profile
   const targetSelectors = [
-    'div[class*="text-title-large"]', // New LeetCode layout
-    'div[class*="font-semibold text-"]',
-    '.text-label-1',
-    '[class*="username"]',
-    'div.flex.items-center h1',
+    'div.text-title-large.font-semibold', // Main username display
+    'div[class*="text-title-large"]',
+    'div.flex.items-center.gap-2 div[class*="font-semibold"]',
     'h1',
-    '.profile-username'
   ];
   
   let target = null;
   for (const selector of targetSelectors) {
     const elements = document.querySelectorAll(selector);
     for (const element of elements) {
-      if (element.textContent.trim() === username || 
-          element.textContent.includes(username)) {
+      // Check if this element contains the username and is near the top
+      const rect = element.getBoundingClientRect();
+      if (element.textContent.trim() === username && rect.top < 300) {
         target = element;
-        console.log('LeetCode Friends: Found target element', selector);
+        console.log('LeetCode Friends: Found target element', selector, 'at position', rect.top);
         break;
       }
     }
@@ -57,11 +55,7 @@ function injectButton(username) {
     return;
   }
   
-  // Create button container
-  const buttonContainer = document.createElement('div');
-  buttonContainer.style.display = 'inline-block';
-  buttonContainer.style.marginLeft = '12px';
-  
+  // Create button
   const button = document.createElement('button');
   button.id = 'leetcode-friend-btn';
   button.className = 'leetcode-friend-button';
@@ -73,15 +67,25 @@ function injectButton(username) {
     addFriend(username, button);
   });
   
-  buttonContainer.appendChild(button);
+  // Find the parent container that holds the username
+  let container = target.parentElement;
   
-  // Insert button after target or in parent
-  if (target.parentNode) {
-    target.parentNode.insertBefore(buttonContainer, target.nextSibling);
-    console.log('LeetCode Friends: Button injected successfully');
+  // Insert button right after the username in the same container
+  if (container && container.classList.contains('flex')) {
+    // If parent is a flex container, add button as sibling
+    container.appendChild(button);
+    console.log('LeetCode Friends: Button added to flex container');
   } else {
-    target.after(buttonContainer);
-    console.log('LeetCode Friends: Button injected using after()');
+    // Otherwise create a wrapper
+    const wrapper = document.createElement('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.gap = '12px';
+    
+    target.parentNode.insertBefore(wrapper, target);
+    wrapper.appendChild(target);
+    wrapper.appendChild(button);
+    console.log('LeetCode Friends: Button wrapped with username');
   }
   
   // Check if already added
