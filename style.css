@@ -1,0 +1,106 @@
+/* Content Script Styles */
+.leetcode-friend-button {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 8px 16px;
+  background: #FFA116;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.leetcode-friend-button:hover {
+  background: #FF8C00;
+  transform: translateY(-1px);
+}
+
+.leetcode-friend-button.added {
+  background: #00C853;
+}
+
+.leetcode-friend-button.added:hover {
+  background: #00A844;
+}
+
+/* Popup Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  width: 320px;
+  min-height: 200px;
+}
+
+.container {
+  padding: 16px;
+}
+
+h2 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #262626;
+}
+
+#friends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.friend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.friend-item:hover {
+  background: #efefef;
+}
+
+.friend-link {
+  color: #FFA116;
+  text-decoration: none;
+  font-weight: 500;
+  flex: 1;
+}
+
+.friend-link:hover {
+  text-decoration: underline;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+}
+
+#empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #666;
+}
+
+#empty-state p {
+  margin: 8px 0;
+}
+
+#empty-state .hint {
+  font-size: 12px;
+  color: #999;
+}
