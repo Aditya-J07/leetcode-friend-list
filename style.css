@@ -1,29 +1,34 @@
 /* Content Script Styles */
 .leetcode-friend-button {
-  display: inline-block;
-  margin-left: 12px;
-  padding: 8px 16px;
-  background: #FFA116;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  display: inline-block !important;
+  margin-left: 12px !important;
+  padding: 8px 16px !important;
+  background: #FFA116 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  vertical-align: middle !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
 
 .leetcode-friend-button:hover {
-  background: #FF8C00;
-  transform: translateY(-1px);
+  background: #FF8C00 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
 }
 
 .leetcode-friend-button.added {
-  background: #00C853;
+  background: #00C853 !important;
 }
 
 .leetcode-friend-button.added:hover {
-  background: #00A844;
+  background: #00A844 !important;
 }
 
 /* Popup Styles */
