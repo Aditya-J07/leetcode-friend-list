@@ -4,7 +4,6 @@ A lightweight Chrome extension that adds a **Friends system** to LeetCode. Easil
 
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-orange?style=flat&logo=googlechrome)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
