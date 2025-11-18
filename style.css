@@ -64,23 +64,31 @@
   background: #00A844 !important;
 }
 
-/* Popup Styles */
+/* Popup Styles - Dark Theme */
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  width: 320px;
+  width: 400px;
   min-height: 200px;
+  max-height: 600px;
+  overflow-y: auto;
+  background: #1a1a1a;
+  color: #eff1f6bf;
 }
 
 .container {
-  padding: 16px;
+  padding: 20px;
+  background: #1a1a1a;
 }
 
 h2 {
-  margin: 0 0 16px 0;
-  font-size: 18px;
-  color: #262626;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #eff1f6bf;
+  font-weight: 600;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2d2d2d;
 }
 
 #friends-list {
@@ -93,52 +101,152 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  background: #f7f7f7;
-  border-radius: 6px;
-  transition: background 0.2s ease;
+  padding: 14px 16px;
+  background: #262626;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 1px solid #2d2d2d;
 }
 
 .friend-item:hover {
-  background: #efefef;
+  background: #2d2d2d;
+  border-color: #3d3d3d;
+  transform: translateY(-1px);
+}
+
+.friend-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .friend-link {
-  color: #FFA116;
+  color: #eff1f6bf;
   text-decoration: none;
-  font-weight: 500;
-  flex: 1;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s ease;
 }
 
 .friend-link:hover {
-  text-decoration: underline;
+  color: #FFA116;
+}
+
+.friend-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.friend-stats.skeleton .skeleton-dash {
+  animation: pulse 1.5s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.stat-number {
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #1a1a1a;
+  min-width: 32px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.stat-number:hover:not(.skeleton-dash):not(.error) {
+  transform: scale(1.05);
+}
+
+.stat-number.total {
+  color: #eff1f6bf;
+  background: #2d2d2d;
+}
+
+.stat-number.easy {
+  color: #00b8a3;
+  background: rgba(0, 184, 163, 0.1);
+}
+
+.stat-number.medium {
+  color: #ffc01e;
+  background: rgba(255, 192, 30, 0.1);
+}
+
+.stat-number.hard {
+  color: #ef4743;
+  background: rgba(239, 71, 67, 0.1);
+}
+
+.stat-number.error {
+  color: #6c6c6c;
+  background: #2d2d2d;
+  opacity: 0.5;
 }
 
 .delete-btn {
-  background: none;
-  border: none;
+  background: #262626;
+  border: 1px solid #3d3d3d;
   cursor: pointer;
   font-size: 14px;
-  padding: 4px;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+  padding: 6px 10px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  border-radius: 6px;
 }
 
 .delete-btn:hover {
   opacity: 1;
+  background: #ef4743;
+  border-color: #ef4743;
+  transform: scale(1.1);
 }
 
 #empty-state {
   text-align: center;
-  padding: 32px 16px;
-  color: #666;
+  padding: 48px 24px;
+  color: #6c6c6c;
 }
 
 #empty-state p {
-  margin: 8px 0;
+  margin: 12px 0;
+  font-size: 15px;
 }
 
 #empty-state .hint {
-  font-size: 12px;
-  color: #999;
+  font-size: 13px;
+  color: #4d4d4d;
+  margin-top: 8px;
+}
+
+/* Custom Scrollbar */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #3d3d3d;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #4d4d4d;
 }
