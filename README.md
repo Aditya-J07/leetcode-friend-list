@@ -173,21 +173,18 @@
 ```
 leetcode-friend-list/
 │
-├── manifest.json
-├── content.js
-├── style.css
-│
-├── popup.html
-├── popup.css
-├── popup.js
-│
-├── background.js
-│
 ├── icons/
 │   ├── icon16.png
 │   ├── icon48.png
 │   └── icon128.png
 │
+├── manifest.json
+├── content.js
+├── style.css
+├── popup.html
+├── popup.css
+├── popup.js
+├── background.js
 ├── README.md
 └── .gitignore
 ```
