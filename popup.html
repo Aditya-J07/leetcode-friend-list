@@ -4,15 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LeetCode Friends</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
-    <h2>LeetCode Friends</h2>
+    <!-- User Profile Section -->
+    <div id="user-section">
+      <div id="user-setup" style="display: none;">
+        <h3>👤 Set Your Username</h3>
+        <div class="input-group">
+          <input type="text" id="username-input" placeholder="Enter your LeetCode username" />
+          <button id="save-username-btn">Save</button>
+        </div>
+      </div>
+      
+      <div id="user-profile" style="display: none;">
+        <div class="user-header">
+          <div class="user-title">
+            <h3>👤 My Profile</h3>
+            <div id="streak-indicator" class="streak-indicator" style="display: none;" title="You haven't solved any problems today!">
+              <span class="red-dot"></span>
+            </div>
+          </div>
+          <button id="edit-username-btn" class="icon-btn">✏️</button>
+        </div>
+        <div class="user-card">
+          <div class="user-info">
+            <a id="user-link" href="#" target="_blank" class="user-link"></a>
+            <div id="user-stats" class="friend-stats">
+              <span class="stat-number skeleton-dash total">-</span>
+              <span class="stat-number skeleton-dash easy">-</span>
+              <span class="stat-number skeleton-dash medium">-</span>
+              <span class="stat-number skeleton-dash hard">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Friends Section -->
+    <div class="section-header">
+      <h2>👥 Friends</h2>
+      <div class="header-actions">
+        <button id="refresh-btn" class="action-btn" title="Refresh stats">🔄</button>
+        <button id="compare-btn" class="action-btn" title="Compare with friends">📊</button>
+        <button id="reorder-btn" class="action-btn" title="Reorder friends">↕️</button>
+      </div>
+    </div>
+    
     <div id="friends-list"></div>
     <div id="empty-state" style="display: none;">
       <p>No friends added yet</p>
       <p class="hint">Visit any LeetCode profile and click "Add Friend"</p>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div id="comparison-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>📊 Comparison</h3>
+          <button class="close-btn" id="close-comparison">✕</button>
+        </div>
+        <div id="comparison-content"></div>
+      </div>
     </div>
   </div>
   <script src="popup.js"></script>
