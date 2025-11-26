@@ -99,8 +99,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/leetcode-friends-extension.git
-   cd leetcode-friends-extension
+   git clone https://github.com/yourusername/leetcode-friend-list.git
+   cd leetcode-friend-list
    ```
 
 2. **Open Chrome Extensions page**
@@ -109,7 +109,7 @@
 
 3. **Load the extension**
    - Click **Load unpacked**
-   - Select the `leetcode-friends-extension` folder
+   - Select the `leetcode-friend-list` folder
 
 4. **Initial Setup**
    - Click the extension icon in your toolbar
@@ -425,7 +425,7 @@ We welcome contributions! Whether it's bug fixes, new features, or documentation
 
 1. **Fork the repository**
    ```bash
-   git fork https://github.com/yourusername/leetcode-friends-extension.git
+   git fork https://github.com/yourusername/leetcode-friend-list.git
    ```
 
 2. **Create a feature branch**
@@ -480,7 +480,7 @@ We welcome contributions! Whether it's bug fixes, new features, or documentation
 
 ### 🐞 Bug Reports
 
-Found a bug? [Open an issue](https://github.com/yourusername/leetcode-friends-extension/issues/new) with:
+Found a bug? [Open an issue](https://github.com/yourusername/leetcode-friend-list/issues/new) with:
 
 **Required Information:**
 - **Browser:** Chrome version (e.g., Chrome 120.0.6099.109)
