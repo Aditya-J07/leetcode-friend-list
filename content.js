@@ -16,16 +16,34 @@ function init() {
 
   const url = window.location.href;
   
-  // Match LeetCode profile URL patterns
-  const match = url.match(/leetcode\.com\/u\/([^\/]+)\/?/);
+  // FIXED: Only match profile pages, not homepage or other pages
+  const match = url.match(/leetcode\.com\/u\/([^\/\?]+)/);
   
   if (match && match[1]) {
     const username = match[1];
     console.log('LeetCode Friends: Detected profile for', username);
     
+    // Check if this is the user's own profile
+    checkAndInjectButton(username);
+  } else {
+    console.log('LeetCode Friends: Not a profile page, skipping button injection');
+  }
+}
+
+// Check if it's user's own profile before injecting
+function checkAndInjectButton(username) {
+  chrome.storage.sync.get(['myUsername'], (result) => {
+    const myUsername = result.myUsername;
+    
+    // Don't show button on your own profile
+    if (myUsername && username.toLowerCase() === myUsername.toLowerCase()) {
+      console.log('LeetCode Friends: This is your own profile, skipping button');
+      return;
+    }
+    
     // Wait a bit for page to fully load
     setTimeout(() => injectButton(username), 1500);
-  }
+  });
 }
 
 function injectButton(username) {
@@ -42,7 +60,7 @@ function injectButton(username) {
   
   console.log('LeetCode Friends: Attempting to inject button for', username);
   
-  // Create a floating button in the top-right corner instead
+  // Create a floating button in the top-right corner
   const button = document.createElement('button');
   button.id = 'leetcode-friend-btn';
   button.className = 'leetcode-friend-button-fixed';
@@ -157,6 +175,13 @@ new MutationObserver(() => {
   if (url !== lastUrl) {
     lastUrl = url;
     console.log('LeetCode Friends: URL changed to', url);
+    
+    // Remove old button if exists
+    const oldButton = document.getElementById('leetcode-friend-btn');
+    if (oldButton) {
+      oldButton.remove();
+    }
+    
     setTimeout(init, 1000);
   }
 }).observe(document, { subtree: true, childList: true });
